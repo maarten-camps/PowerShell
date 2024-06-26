@@ -1,6 +1,6 @@
 # Create Shared Bookingspage 
-# Required Graph Modules: Microsoft.Graph.Users, Microsoft.Graph.Bookings
-# Required Permissions, Exchange Admin
+# 
+# 
 # Connect to Graph
 
 Select-MgProfile beta

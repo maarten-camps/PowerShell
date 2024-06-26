@@ -1,7 +1,3 @@
-# Create Shared Bookingspage 
-# 
-# 
-# Connect to Graph
 
 Select-MgProfile beta
 Connect-MgGraph -Scopes "User.Read.All", "Bookings.Manage.All", "Bookings.Read.All", "Bookings.ReadWrite.All", "BookingsAppointment.ReadWrite.All" | Out-null

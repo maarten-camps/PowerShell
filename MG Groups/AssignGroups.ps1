@@ -11,13 +11,14 @@
 Connect-MgGraph -Scopes "User.Read.All", "Group.Read.All", "Device.Read.All"
 
 $users = Import-Csv C:\temp\users.csv   #'.\MG Groups\Users.csv'
-$LicenseGroupID = 
-$ItemInsightsGroupID = 
-$OfficeUpgradeGroupID = 
+$LicenseGroupID = "" # Add ID of License Security Group
+$ItemInsightsGroupID = "" # Add ID of Group to enable ItemInsights
+$OfficeUpgradeGroupID = "" #Add ID of group for OfficeUpgrade
+$DeviceNameStart = "" #Enter Device name to filter
 
 foreach ($User in $users) {
     $UPN = $User.UPN
-    $UserID = get-MGuser -UserId $UPN | Select ID 
+    $UserID = get-MGuser -UserId $UPN | Select ID
     $ID = $UserID.Id
 
     # Assign user to License Group
@@ -34,7 +35,7 @@ foreach ($User in $users) {
     $Devices = Get-MgUserRegisteredDevice -UserId $ID
     foreach ($D in $devices){
         $Device = Get-MgDevice -DeviceId $D.id
-        if ($Device.DisplayName -match "AEDW10-"){
+        if ($Device.DisplayName -match $DeviceNameStart){
             $deviceID = $D.Id
             Write-Output "upgrade office for $device."DisplayName""
             New-MgGroupMember -GroupId $OfficeUpgradeGroupID -DirectoryObjectId $deviceId

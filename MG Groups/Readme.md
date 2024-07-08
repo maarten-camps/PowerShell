@@ -1,4 +1,4 @@
-# Graph API user Managent
+# Graph API user Management
 
 - Assign users to a Group, Find the users device and add this to another Group
 

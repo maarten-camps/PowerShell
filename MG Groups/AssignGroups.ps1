@@ -32,7 +32,3 @@ foreach ($User in $users) {
     #Add device to Secrity Group
     
 }
-   
-
-$UserID = get-MGuser -UserId| Select Id
-$userID

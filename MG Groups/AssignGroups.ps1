@@ -8,7 +8,7 @@
 
 
 
-#Connect-MgGraph -Scopes "User.Read.All", "Group.Read.All"
+Connect-MgGraph -Scopes "User.Read.All", "Group.Read.All, Device.Read.All"
 
 $users = Import-Csv C:\temp\users.csv   #'.\MG Groups\Users.csv'
 $LicenseGroupID = 
@@ -28,7 +28,12 @@ foreach ($User in $users) {
     Remove-MgGroupMemberByRef -GroupId $ItemInsightsGroupID -DirectoryObjectId $ID
 
     #Get User Device info
+    $Devices = Get-MgUserRegisteredDevice -UserId maarten.camps@tennet.eu 
+    foreach ($D in $devices){
+        $Device = Get-MgDevice -DeviceId $D.id
+        if ($Device.DisplayName -contains "AEDW10"){
+            New-MgGroupMember -GroupId $OfficeUpgradeGroupID -DirectoryObjectId $D.Id
+        }
+    }
 
-    #Add device to Secrity Group
-    
 }

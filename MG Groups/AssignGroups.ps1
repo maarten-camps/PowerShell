@@ -1,12 +1,10 @@
 ## 
 #
 #  Assign Groups
-# Author Maarten Camps
+# 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
 # # 
-
-
 
 Connect-MgGraph -Scopes "User.Read.All", "Group.Read.All", "Device.Read.All"
 
@@ -25,12 +23,12 @@ foreach ($User in $users) {
     Write-Output "Add $UPN to Copilot License Group"
     New-MgGroupMember -GroupId $LicenseGroupID -DirectoryObjectId $ID
 
-    #Enable Item insights for the Specific User 
+    #Enable Item insights for the Specific User, Item Insights is disable fro a specific group os user , Enabling requires to remove those users from the group.
 
     Write-Output "Enable Iteminsights for $upn" 
     Remove-MgGroupMemberByRef -GroupId $ItemInsightsGroupID -DirectoryObjectId $ID
 
-    #Get User Device info
+    #Get User Device info and add device to specific group
 
     $Devices = Get-MgUserRegisteredDevice -UserId $ID
     foreach ($D in $devices){

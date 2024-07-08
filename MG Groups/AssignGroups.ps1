@@ -34,5 +34,5 @@ foreach ($User in $users) {
 }
    
 
-$UserID = get-MGuser -UserId maarten.camps@tennet.eu | Select Id
+$UserID = get-MGuser -UserId| Select Id
 $userID

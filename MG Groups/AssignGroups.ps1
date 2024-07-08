@@ -28,7 +28,7 @@ foreach ($User in $users) {
     Remove-MgGroupMemberByRef -GroupId $ItemInsightsGroupID -DirectoryObjectId $ID
 
     #Get User Device info
-    $Devices = Get-MgUserRegisteredDevice -UserId maarten.camps@tennet.eu 
+    $Devices = Get-MgUserRegisteredDevice -UserId $ID
     foreach ($D in $devices){
         $Device = Get-MgDevice -DeviceId $D.id
         if ($Device.DisplayName -contains "AEDW10"){
